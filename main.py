@@ -3,7 +3,7 @@ from curses import wrapper
 import queue
 import time
 
-# "O" is end, "X" is the starting, "#" are walls, and " " is a pathway
+# "X" is end, "O" is the starting, "#" are walls, and " " is a pathway
 maze = [
     ["#", "O", "#", "#", "#", "#", "#", "#", "#"],
     ["#", " ", " ", " ", " ", " ", " ", " ", "#"],
@@ -24,9 +24,22 @@ def print_maze(maze, stdscr, path=[]):
     for i, row in enumerate(maze):
         for j, value in enumerate(row):
             stdscr.addstr(i, j*2, value, BLUE)
+# Find the entrance of maze
+def find_start(maze, start):
+    for i, row in enumerate(maze):
+        for j, value in enumerate(row):
+            if value == start:
+                return i, j
+    return None
 
-def find_path():
-    pass
+# Find the shortest path out
+def find_path(maze, stdscr):
+    start = "O"
+    end = "X"
+    start_pos = find_start(maze, start)
+
+    q = queue.Queue()
+    q.put((start_pos, [start_pos]))
 
 def main(stdscr):
     curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLACK)
