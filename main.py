@@ -41,7 +41,8 @@ def find_path(maze, stdscr):
     start = "O"
     end = "X"
     start_pos = find_start(maze, start)
-    # Initialize Queue    q = queue.Queue()
+    # Initialize Queue    
+    q = queue.Queue()
     q.put((start_pos, [start_pos]))
     # Avoid repitition
     visited = set()
