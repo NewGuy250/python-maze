@@ -18,9 +18,10 @@ maze = [
 
 # Visualize map
 def print_maze(maze, stdscr, path=[]):
+    # Color pairs
     BLUE = curses.color_pair(1)
     RED = curses.color_pair(2)
-
+    # Print each row
     for i, row in enumerate(maze):
         for j, value in enumerate(row):
             if (i, j) in path:
@@ -40,10 +41,9 @@ def find_path(maze, stdscr):
     start = "O"
     end = "X"
     start_pos = find_start(maze, start)
-
-    q = queue.Queue()
+    # Initialize Queue    q = queue.Queue()
     q.put((start_pos, [start_pos]))
-
+    # Avoid repitition
     visited = set()
 
     while not q.empty():
@@ -52,9 +52,10 @@ def find_path(maze, stdscr):
 
         stdscr.clear()
         print_maze(maze, stdscr, path)
+        # Make it so the user can see how the algorithim works
         time.sleep(0.2)
         stdscr.refresh()
-
+        # End if X is reached
         if maze[row][col] == end:
             return path
         
